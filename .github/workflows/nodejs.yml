@@ -26,6 +26,6 @@ jobs:
       - name: release
         uses: brpaz/action-semantic-release@v1
         with:
-          dry_run: "true"
+          dry_run: "false"
           install_plugins: "@semantic-release/npm @semantic-release/changelog"
           branch: master
