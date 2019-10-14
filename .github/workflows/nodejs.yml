@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -12,18 +11,17 @@ jobs:
         node-version: [8.x, 10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      with: # Set the secret as an input
-        GH_NPM_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
-      env: # Or as an environment variable
-        GH_NPM_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
-      run: |
-        npm
-        npm run compile
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        with: # Set the secret as an input
+          GH_NPM_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
+        env: # Or as an environment variable
+          GH_NPM_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
+          CI: true
+        run: |
+          npm
+          npm run compile
