@@ -19,8 +19,7 @@ jobs:
       - name: npm install, build, and test
         env: # Or as an environment variable
           CI: true
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm
           npm run compile
