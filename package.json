@@ -1,0 +1,21 @@
+{
+  "name": "@barajs/express",
+  "version": "0.1.0-alpha.0",
+  "description": "Bara Express integration module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsnd --debounce 3000 --respawn server.ts",
+    "compile": "tsc -b"
+  },
+  "dependencies": {
+    "@barajs/bara": "^3.0.0-alpha.413",
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.1",
+    "ts-node-dev": "1.0.0-pre.43",
+    "typescript": "3.6.3"
+  }
+}
