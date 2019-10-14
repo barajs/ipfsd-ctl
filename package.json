@@ -2,6 +2,10 @@
   "name": "@barajs/express",
   "version": "0.1.0-alpha.0",
   "description": "Bara Express integration module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/barajs/express.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
