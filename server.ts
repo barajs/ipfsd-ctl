@@ -1,30 +1,42 @@
-import { run, app, act, cond } from "@barajs/core";
-import ExpressServer, {
+import { run, app, act, cond } from '@barajs/core'
+
+import Express, {
   whenExpressInitialized,
-  whenRouteGet,
-  hasQuery,
-  WhenRouteGet
-} from "./src";
+  whenAnyGet,
+  whenAnyPost,
+  hasGetQuery,
+  WhenRequest,
+  hasPostPath,
+} from './src'
 
 run(
   app({
-    portion: [ExpressServer({ port: 3200 })],
+    portion: [Express({ port: 3200 })],
     trigger: [
       whenExpressInitialized(
-        // An `act` will also be created new stream when subscribe to a flow.
-        act(() => console.log("Hello from Bara trigger")),
-        act(() => console.log("Bara has initialized this trigger!"))
+        act(({ port }: any) =>
+          console.log(`Express server started on http://localhost:${port}`),
+        ),
+        act(() => console.log('Hello from Bara trigger')),
       ),
-      whenRouteGet(
-        // Each `cond` will create to new sub stream with its own conditional checker.
+      whenAnyGet(
         cond(
-          hasQuery("first"),
-          act(({ request, response }: WhenRouteGet) => {
-            const { query } = request;
-            response.send({ success: "Congrats!", query });
-          })
-        )
-      )
-    ]
-  })
-);
+          hasGetQuery('first'),
+          act(({ request, response }: WhenRequest) => {
+            const { query } = request
+            response.send({ success: true, query })
+          }),
+        ),
+      ),
+      whenAnyPost(
+        cond(
+          hasPostPath('/webhook'),
+          act(({ request, response }: WhenRequest) => {
+            const { query, route } = request
+            response.send({ success: true, query, route })
+          }),
+        ),
+      ),
+    ],
+  }),
+)
