@@ -45,4 +45,5 @@ export {
 }
 
 export * from './types'
+export * from './curry'
 export default ExpressServer
