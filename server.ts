@@ -1,7 +1,7 @@
 import { run, app, act, cond } from '@barajs/core'
 
 import Express, {
-  whenExpressInitialized,
+  whenExpressStarted,
   whenAnyGet,
   whenAnyPost,
   hasGetQuery,
@@ -13,7 +13,7 @@ run(
   app({
     portion: [Express({ port: 3200 })],
     trigger: [
-      whenExpressInitialized(
+      whenExpressStarted(
         act(({ port }: any) =>
           console.log(`Express server started on http://localhost:${port}`),
         ),
@@ -32,8 +32,8 @@ run(
         cond(
           hasPostPath('/webhook'),
           act(({ request, response }: WhenRequest) => {
-            const { query, route } = request
-            response.send({ success: true, query, route })
+            const { query, originalUrl } = request
+            response.send({ success: true, query, originalUrl })
           }),
         ),
       ),

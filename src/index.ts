@@ -1,15 +1,10 @@
 import { portion, flow, popEvent, popSeep } from '@barajs/bara'
-import express, { Request, Response, Application } from 'express'
+import express, { Application } from 'express'
 
-import { WhenRequest } from './types'
-import { hasQuery, hasPath } from './seep'
+import { WhenRequest, ExpressMold } from './types'
+import * as expressFlows from './flow'
 
-export interface ExpressMold {
-  port?: number
-  middlewares?: any[]
-}
-
-const ExpressServer = portion<Request, Application, ExpressMold>({
+const ExpressServer = portion<WhenRequest, Application, ExpressMold>({
   name: 'bara-express',
   mold: { port: +process.env.PORT! || 3456 },
   init: () => {
@@ -27,26 +22,11 @@ const ExpressServer = portion<Request, Application, ExpressMold>({
       })
     },
   }),
-  whenAnyGet: flow<WhenRequest, Application, ExpressMold>({
-    bootstrap: ({ context: expressApp, next }) => {
-      expressApp.get('*', (request: Request, response: Response) => {
-        next({ request, response })
-      })
-    },
-    seep: { hasGetQuery: hasQuery, hasGetPath: hasPath },
-  }),
-  whenAnyPost: flow<WhenRequest, Application, ExpressMold>({
-    bootstrap: ({ context: expressApp, next }) => {
-      expressApp.post('*', (request: Request, response: Response) => {
-        next({ request, response })
-      })
-    },
-    seep: { hasPostQuery: hasQuery, hasPostPath: hasPath },
-  }),
+  ...expressFlows,
 })
 
 const {
-  whenInitialized: whenExpressInitialized,
+  whenInitialized: whenExpressStarted,
   whenAnyGet,
   whenAnyPost,
 } = popEvent(ExpressServer)
@@ -55,7 +35,7 @@ const { hasGetQuery, hasGetPath } = popSeep(whenAnyGet)
 const { hasPostQuery, hasPostPath } = popSeep(whenAnyPost)
 
 export {
-  whenExpressInitialized,
+  whenExpressStarted,
   whenAnyGet,
   whenAnyPost,
   hasGetQuery,
