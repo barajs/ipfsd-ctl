@@ -9,6 +9,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "tsnd --debounce 3000 --respawn server.ts",
     "compile": "tsc -b",
