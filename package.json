@@ -1,7 +1,7 @@
 {
   "name": "@barajs/ipfsd-ctl",
   "version": "0.1.0-alpha.0",
-  "description": "Bara IPFS integration module",
+  "description": "Bara IPFS integration portion",
   "repository": {
     "type": "git",
     "url": "git@github.com:barajs/express.git"
