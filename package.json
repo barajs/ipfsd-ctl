@@ -21,7 +21,7 @@
     "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
-    "@barajs/core": "3.0.0-alpha.414",
+    "@barajs/core": "3.0.0-alpha.430",
     "@types/node": "12.11.1",
     "ipfs": "0.38.1",
     "ipfsd-ctl": "0.47.4"
