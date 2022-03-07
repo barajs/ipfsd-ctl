@@ -24,7 +24,7 @@
     "@barajs/core": "3.0.0-alpha.414",
     "@types/node": "12.11.1",
     "ipfs": "0.38.1",
-    "ipfsd-ctl": "0.47.4"
+    "ipfsd-ctl": "10.0.6"
   },
   "devDependencies": {
     "prettier": "1.18.2",
