@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@barajs/core": "3.0.0-alpha.414",
-    "@types/node": "12.11.1",
+    "@types/node": "18.18.6",
     "ipfs": "0.38.1",
     "ipfsd-ctl": "0.47.4"
   },
